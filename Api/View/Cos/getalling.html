@@ -1,0 +1,16 @@
+<table border="0">
+	<tr>
+		<th id="th1"><div class="th-inside">成分名称</div></th>
+		<th id="th2"><div class="th-inside">英文名称</div></th>
+		<th id="th3"><div class="th-inside">安全风险</div></th>
+		<th id="th4"><div class="th-inside">使用目的</div></th>
+	</tr>
+	<volist name="res" id="vo">
+		<tr class="tr-data">
+			<td class="td1">{$vo.chname}</td>
+			<td class="td2">{$vo.name}</td>
+			<td class="td3"><img style="width: 35px;height: 42px;" src="./img/safe{$vo.safelevel}.png"></td>
+			<td class="td4">{$vo.outprop}</td>
+		</tr>
+	</volist>
+</table>

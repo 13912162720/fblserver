@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="./css/reportlist.css">
+</head>
+<style type="text/css">
+	.report-list-ctime{
+		color: #2a2a2a;
+		font-size: 13px;
+		font-family: pfl;
+		letter-spacing: 1px;
+		line-height: 18px;
+		height: 30px;
+	}
+</style>
+<body>
+	<div class="report-cloumn">
+		<ul class="report-list">
+			<volist name="reportres" id="vo">
+				<li class="report-list-li" onclick="getReport({$vo.id})">
+					<img src="http://fbl.ai/{$vo.banner}">
+					<div class="report-list-font">
+						<p class="report-list-title">{$vo.title}</p>
+						<p class="report-list-intro">{$vo.intro}</p>
+						<p class="report-list-ctime">{$vo.create_time|date="Y-m-d",###}</p>
+					</div>
+				</li>
+			</volist>
+		</ul>
+	</div>
+</body>
+<script type="text/javascript">
+	$('.report-list-li:first').addClass('border-solid')
+</script>
+</html>

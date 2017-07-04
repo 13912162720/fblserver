@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="./css/getcosinfo.css">
+</head>
+<body>
+<div class="cos-info-cloumn">
+		<img id="s2-img" src="{$res1.img}">
+		<div id="s2-div1">
+			<div class="s2-style-1">
+				{$res1.bname}&nbsp;{$res1.cosname}
+			</div>
+			<div class="s2-style-2">{$res1.balias}</div>
+			<div class="s2-style-3">
+				别名：暂无
+			</div>
+		</div>
+		<div id="s2-div2">
+			<div class="s2-style-1">
+				产品综述
+			</div>
+			<div class="s2-style-2">
+				PRODUCT OVERVIEW
+			</div>
+			<div class="s2-style-3">
+				暂无
+			</div>
+		</div>
+		<div id="s2-div3">
+			<div class="s2-style-1">
+				产品成分
+			</div>
+			<div class="s2-style-2">
+				INGREDIENTS
+			</div>
+			<div class="s2-table">
+				<table border="0">
+					<tr>
+						<th id="th1"><div class="th-inside">成分名称</div></th>
+						<th id="th2"><div class="th-inside">英文名称</div></th>
+						<th id="th3"><div class="th-inside">安全风险</div></th>
+						<th id="th4"><div class="th-inside">使用目的</div></th>
+					</tr>
+					<volist name="res" id="vo">
+						<tr class="tr-data">
+							<td class="td1">{$vo.chname}</td>
+							<td class="td2">{$vo.name}</td>
+							<td class="td3"><img style="width: 35px;height: 42px;" src="./img/safe{$vo.safelevel}.png"></td>
+							<td class="td4">{$vo.outprop}</td>
+						</tr>
+					</volist>
+				</table>
+				<div class="getmore">
+					<div class="getmore-bor" onclick="getIng({$res1.cosid})">查看全部成分</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	
+</script>
+</html>

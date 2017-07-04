@@ -1,0 +1,29 @@
+<head>
+	<link rel="stylesheet" type="text/css" href="./css/searchres.css">
+</head>
+<body>
+<div class="cos-res-cloumn">
+	<ul class="cos-list">
+		<volist name="res" id="vo">
+			<li onclick="searchcos({$vo.id})">
+			 	<img src="{$vo.img}" val="{$vo.orglink}">
+				<div class="list-cos-desc">
+					<div class="list-cos-title">{$vo.name}&nbsp;{$vo.cosname}</div>
+					<div class="list-cos-body">{$vo.balias}</div>
+					<div class="list-cos-alias">别名：暂无</div>
+				</div>
+			</li>
+		</volist>
+	</ul>
+	<div class="cutpage">
+		<div class="page prepage" onclick="getInfo({$pagenow-1})"><img src="./img/prepage.png"></div>
+		<div class="page">{$pagenow}</div>
+		<div class="page">/</div>
+		<div class="page">{$pagecount}</div>
+		<div class="page nextpage" onclick="getInfo({$pagenow+1})"><img src="./img/nextpage.png"></div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+	$('.cos-list li:first').addClass('border-solid-search')
+</script>

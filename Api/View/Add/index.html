@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="http://r.weilaimeixue.com/js/jquery.min.js"></script>
+	<script type="text/javascript" src="http://r.weilaimeixue.com/js/jquery.form.js"></script>
+	<meta charset="utf-8">
+	<title>123</title>
+</head>
+<style type="text/css">
+	body{
+		text-align: center;
+	}
+	.op{
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		background-color: rgba(155,155,155,0.5);
+		display: none;
+	}
+	.change-pad{
+		position: absolute;
+		width: 300px;
+		height: 500px;
+		background-color: white;
+		left: 50%;top: 50%;
+		margin-left: -150px;margin-top: -250px;
+		border-radius: 20px;
+	}
+	.pad-title{
+		padding-top: 10px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #ccc;
+	}
+	#pad-title-info{
+		display: inline-block;
+		width: 250px;
+	}
+	.pad-title-close{
+		cursor: pointer;
+		float: right;
+		margin-right: 10px;
+	}
+	.pad-body-column{
+		padding: 20px;
+	}
+	input{
+		width: 160px;
+	}
+	#pad-body-submit{
+		width: 160px;
+		height: 30px;
+	}
+</style>
+<body>
+<div class="op">
+	<div class="change-pad">
+		<div class="pad-title">
+			<div id="pad-title-info">我是头部</div>
+			<span class="pad-title-close" onclick="close_changepad()">×</span>
+		</div>
+		<div class="pad-body">
+			<div class="pad-body-column">
+				<span>妆品别名：</span><input type="text" name="alias">
+			</div>
+			<div class="pad-body-column">
+				<span>产品综述：</span><input type="text" name="description">
+			</div>
+			<div class="pad-body-column">
+				<span>图片：</span>
+					<form id="form1" method="post" action="" enctype="multipart/form-data">
+						<input id="input-photo" type="file" name="photo">
+					</form>	
+				<img id="pre-photo" style="width:180px;margin-top: 10px;" src="get_upload_photo" >
+			</div>
+			<div class="pad-body-column">
+				<button id="pad-body-submit">确认更改</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="main">
+	<table>
+	<tr>
+		<th>ID</th>
+		<th>品牌</th>
+		<th>品牌别名</th>
+		<th>化妆品</th>
+		<th>妆品别名</th>
+		<th style="width: 200px">图片</th>
+		<th>产品综述</th>
+		<th>操作</th>
+	</tr>
+		<volist name="res" id="vo">
+			<tr id="tr-{$vo.cid}">
+				<td class="td-id">{$vo.cid}</td>
+				<td class="td-brandname">{$vo.brandname}</td>
+				<td class="td-brandalias">{$vo.brandalias}</td>
+				<td class="td-cosname">{$vo.cosname}</td>
+				<td class="td-cosalias">
+					<if condition="$vo.cosalias neq NULL">
+						{$vo.cosalias}
+					<else/>
+						<span style="color:red">无</span>
+					</if>
+				</td>
+				<td class="td-photo">
+					<if condition="$vo.photo neq NULL">
+						<img src="{$vo.photo}">
+					<else/>
+						<img style="width: 180px;padding: 10px;" src="https://img.alicdn.com/bao/uploaded/i2/TB1j0lsSXXXXXc8XXXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg">
+					</if>
+				</td>
+				<td class="td-description">
+					<if condition="$vo.description neq NULL">
+						{$vo.description}
+					<else/>
+						<span style="color:red">无</span>
+					</if>
+				</td>
+				<td class="curd" >CURD</td>
+			</tr>
+		</volist>
+	</table>
+</div>
+</body>
+<script type="text/javascript">
+	function close_changepad(){
+		$('.op').hide();
+	}
+
+	$('.curd').click(function(){
+		var id = $(this).siblings('.td-id').html()
+		var cosname = $(this).siblings('.td-cosname').html()
+		var brandname = $(this).siblings('.td-brandname').html()
+		var brandalias = $(this).siblings('.td-brandalias').html()
+		var cosalias = $(this).siblings('.td-cosalias').html()
+		var photo = $(this).siblings('.td-photo').children('img').attr('src')
+		var description = $(this).siblings('.td-description').html()
+		console.log(photo)
+		$('#pad-title-info').html(cosname)
+		$('#pre-photo').attr('src',photo)
+		$('.op').show()
+	})
+
+	function show_oppad(id){
+		$('.op').show()
+	}
+
+
+		//上传图片 
+		$("#pad-body-submit").click(function () { 
+			if ($("#input-photo").val() == "") { 
+				alert("请选择一个图片文件，再点击上传。"); 
+				return; 
+			}
+			$('#form1').ajaxSubmit({ 
+				type:'post',
+                url:'get_upload_photo',
+				success: function (data) { 
+					alert(data);
+				},
+			}); 
+		}); 
+ 
+</script>
+</html>
